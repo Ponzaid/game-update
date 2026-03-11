@@ -1,0 +1,27 @@
+init python:
+
+    import urllib.request
+    import json
+
+    update_available = False
+    latest_version = ""
+    update_url = ""
+
+    def check_update():
+
+        global update_available
+        global latest_version
+        global update_url
+
+        try:
+            data = urllib.request.urlopen("https://github.com/Ponzaid/game-update.git").read()
+            info = json.loads(data)
+
+            latest_version = info["version"]
+            update_url = info["url"]
+
+            if latest_version != game_version:
+                update_available = True
+
+        except:
+            pass
